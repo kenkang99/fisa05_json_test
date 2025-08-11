@@ -9,7 +9,7 @@ load_dotenv()
 
 NOW = datetime.now()
 
-URL = f"https://jsonplaceholder.typicode.com/todos/{NOW+1}"
+URL = f"https://jsonplaceholder.typicode.com/todos/{NOW.minute+1}"
 
 JSON_PATH = "/tmp/test.json"
 
