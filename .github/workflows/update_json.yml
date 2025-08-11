@@ -1,8 +1,8 @@
-name: Update Weather in README
+name: Update json in README
 
 on:
   schedule:
-    - cron: "*/2 * * * *"  # 매일 오후 3시 (UTC 기준 6시)
+    - cron: "*/5 * * * *"  
   workflow_dispatch:  # 수동 실행 가능
 
 jobs:
@@ -17,19 +17,18 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: OpenWeather API로 서울 날씨 업데이트
+      - name: jsonplaceholder 업데이트
         run: |
           pip install requests
           pip install requests python-dotenv
-          python update_weather.py
-        env:
-          WEATHER: ${{ secrets.WEATHER }}
+          python update_json.py
+        
 
       - name: 변경 사항 커밋 및 푸시
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "자동 업데이트: 서울 날씨 정보 갱신" || echo "No changes to commit"
+          git add .
+          git commit -m "자동 업데이트: json 갱신" || echo "No changes to commit"
           git push
 
